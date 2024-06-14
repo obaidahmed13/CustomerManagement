@@ -17,6 +17,35 @@
 		<java.version>22</java.version>
 	</properties>
 	<dependencies>
+		<!-- Spring Boot Starter AOP -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+		For Spring Core Project:
+
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>6.1.4</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/io.github.qsy7.java.dependencies/aspectjrt -->
+		<dependency>
+			<groupId>io.github.qsy7.java.dependencies</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>0.3.3</version>
+			<type>pom</type>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>1.9.21.1</version>
+			<scope>runtime</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
