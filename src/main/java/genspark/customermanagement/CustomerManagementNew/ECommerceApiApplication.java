@@ -1,13 +1,13 @@
-package genspark.customermanagement.CustomerManagementNew;
+package com.example.e_commerce_api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CustomerManagementNewApplication {
+public class ECommerceApiApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CustomerManagementNewApplication.class, args);
+		SpringApplication.run(ECommerceApiApplication.class, args);
 	}
 
 }
