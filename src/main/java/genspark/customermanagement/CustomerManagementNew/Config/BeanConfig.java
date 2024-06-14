@@ -3,14 +3,19 @@ package genspark.customermanagement.CustomerManagementNew.Config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+
+import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @EnableMethodSecurity
@@ -34,6 +39,26 @@ public class BeanConfig {
                 .build();
 
         return new InMemoryUserDetailsManager(normalUser, adminUser);
+    }
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity.authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers("/public").permitAll()
+                        .requestMatchers("/normal").hasRole("NORMAL")
+                        .requestMatchers("/admin").hasRole("ADMIN")
+                        .anyRequest().authenticated())
+                .httpBasic(withDefaults())
+                .formLogin(form -> form
+                        .loginPage("/login")  // Custom login page
+                        .defaultSuccessUrl("/default")  // Default success URL
+                        .successHandler(customAuthenticationSuccessHandler())  // Custom success handler
+                        .permitAll())
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/login?logout")
+                        .permitAll())
+                .csrf(AbstractHttpConfigurer::disable);
+        return httpSecurity.build();
     }
 
     @Bean

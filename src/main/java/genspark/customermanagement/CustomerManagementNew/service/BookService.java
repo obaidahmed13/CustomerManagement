@@ -1,7 +1,8 @@
-package com.example.e_commerce_api.service;
+package genspark.customermanagement.CustomerManagementNew.service;
 
-import com.example.e_commerce_api.entity.Book;
-import com.example.e_commerce_api.repository.BookDAO;
+
+import genspark.customermanagement.CustomerManagementNew.entity.Book;
+import genspark.customermanagement.CustomerManagementNew.repository.BookDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
