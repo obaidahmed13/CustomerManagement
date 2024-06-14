@@ -1,17 +1,20 @@
-package com.example.e_commerce_api.controller;
+package genspark.customermanagement.CustomerManagementNew.controller;
 
-import com.example.e_commerce_api.entity.Book;
-import com.example.e_commerce_api.service.BookService;
+
+
+import genspark.customermanagement.CustomerManagementNew.entity.Book;
+import genspark.customermanagement.CustomerManagementNew.service.BookService;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 @Slf4j
 public class BookController {
 
@@ -19,6 +22,14 @@ public class BookController {
     BookService service;
 
     private static final Logger logger = LoggerFactory.getLogger(BookController.class);
+    @GetMapping("/login")
+    public String getLogin(){
+        return "login";
+    }
+    @GetMapping("/")
+    public String getPublic(){
+        return "public";
+    }
 
     @GetMapping("/books")
     public List<Book> getAllBooks() {

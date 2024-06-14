@@ -1,4 +1,4 @@
-package com.example.e_commerce_api.entity;
+package genspark.customermanagement.CustomerManagementNew.entity;
 
 import jakarta.persistence.*;
 
