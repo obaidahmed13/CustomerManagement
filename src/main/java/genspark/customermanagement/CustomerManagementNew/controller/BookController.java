@@ -99,42 +99,39 @@ public class BookController {
         return "showBooks";
     }
 
-    @PutMapping("/books/purchase/{id}")
-    public boolean purchaseBookById(@PathVariable long id) {
-        logger.info("Purchasing book with ID: {}", id);
-
-        Book result = service.getBookById(id);
-        // Check if book exists or if it's in stock
-        if (result == null || result.getQuantity() <= 0) {
-            logger.warn("Book not found or not in stock");
-
-        }
-
-        // Record purchase by decrementing quantity by 1
-        result.setQuantity(result.getQuantity() - 1);
-        if (service.updateBook(result) != null) {
-            logger.info("Book successfully purchased");
-            return true;
-        }
-
-        logger.warn("Book purchase failed");
-        return false;
-    }
+//    @PutMapping("/books/purchase/{id}")
+//    public boolean purchaseBookById(@PathVariable long id) {
+//        logger.info("Purchasing book with ID: {}", id);
+//
+//        Book result = service.getBookById(id);
+//        // Check if book exists or if it's in stock
+//        if (result == null || result.getQuantity() <= 0) {
+//            logger.warn("Book not found or not in stock");
+//
+//        }
+//
+//        // Record purchase by decrementing quantity by 1
+//        result.setQuantity(result.getQuantity() - 1);
+//        if (service.updateBook(result) != null) {
+//            logger.info("Book successfully purchased");
+//            return true;
+//        }
+//
+//        logger.warn("Book purchase failed");
+//        return false;
+//    }
 
     @DeleteMapping("/books/{id}")
-    public boolean deleteBooksById(@PathVariable long id) {
+    public String deleteBooksById(@PathVariable long id) {
         logger.info("Deleting book with ID: {}", id);
 
-        int count = service.getAllBooks().size();
-        service.deleteBookById(id);
-
         // If count changed, then delete was successful
-        if (count != service.getAllBooks().size()) {
+        if (service.deleteBookById(id)){
             logger.info("Book successfully deleted");
-            return true;
+        }else {
+            logger.info("Couldnt find book");
         }
-        logger.warn("Book delete failed");
-        return false;
+        return "showBooks";
     }
 
 }

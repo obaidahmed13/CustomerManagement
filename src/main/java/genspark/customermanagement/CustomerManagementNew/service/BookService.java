@@ -47,8 +47,13 @@ public class BookService {
         return dao.save(book);
     }
 
-    public void deleteBookById(long id) {
-        dao.deleteById(id);
-    }
+    public boolean deleteBookById(long id) {
+        Optional<Book> result = dao.findById(id);
 
+        if (result.isPresent()) {
+            this.dao.deleteById(id);
+            return true;
+        }
+        return false;
+    }
 }
