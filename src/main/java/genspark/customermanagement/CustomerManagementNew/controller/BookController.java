@@ -5,6 +5,7 @@ package genspark.customermanagement.CustomerManagementNew.controller;
 import genspark.customermanagement.CustomerManagementNew.entity.Book;
 import genspark.customermanagement.CustomerManagementNew.service.BookService;
 import lombok.extern.slf4j.Slf4j;
+import org.h2.engine.Mode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,111 +36,102 @@ public class BookController {
     @GetMapping("/books")
     public String getAllBooks(Model model) {
         List<Book> books = service.getAllBooks();
+        System.out.println(books.size());
         model.addAttribute("books", books);
         return "showBooks";
     }
 
     @GetMapping("/books/sorted")
-    public List<Book> getAllBooksByTitleOrder() {
-        logger.info("Getting all books by title order");
-        return service.getAllBooksByTitleOrder();
+    public String getAllBooksByTitleOrder(Model model) {
+        List<Book> books = service.getAllBooksByTitleOrder();
+        model.addAttribute("books",books);
+        return "showBooks";
     }
 
-    @GetMapping("/books/id/{id}")
-    public ResponseEntity<?> getBookById(@PathVariable long id) {
+    @GetMapping("/books/{id}")
+    public String getBookById(@PathVariable long id,Model model) {
         logger.info("Getting book by ID: {}", id);
 
         Book result = service.getBookById(id);
         if (result == null) {
             logger.warn("Book not found");
-            return ResponseEntity.status(404).body("Book not found");
         }
         logger.info("Book successfully found");
-        return ResponseEntity.ok().body(result);
+        model.addAttribute("books",result);
+        return "showBooks";
     }
 
-    @GetMapping("/books/title/{title}")
-    public Book getBookByTitle(@PathVariable String title) {
+    @GetMapping("/books/{title}")
+    public String getBookByTitle(@PathVariable String title, Model model) {
         logger.info("Getting book by title: {}", title);
-
         Book result = service.getBookByTitle(title);
         if (result == null) {
             logger.warn("Book not found");
             return null;
         }
-
         logger.info("Book successfully found");
-        return service.getBookByTitle(title);
+        model.addAttribute("books",result);
+        return "showBooks";
     }
 
     @PostMapping("/books")
-    public Book addBook(@RequestBody Book book) {
+    public String addBook(@RequestBody Book book, Model model) {
         logger.info("Adding new book with title: {}", book.getTitle());
-
-        // Prevent overwriting a book with same ID
-        book.setId(0);
-
         // Check if book with given title already exists
-        Book result = service.getBookByTitle(book.getTitle());
-        if (result != null) {
-            logger.warn("Book with title: {} already exists", book.getTitle());
-            return null;
-        }
         logger.info("Book successfully added");
-        return service.addBook(book);
+        Book book1 = service.addBook(book);
+        model.addAttribute("books",book);
+        return "showBooks";
     }
 
     @PutMapping("/books")
-    public Book updateBook(@RequestBody Book book) {
+    public String updateBook(@RequestBody Book book, Model model) {
         logger.info("Updating book with title: {}", book.getTitle());
 
         // Check if update target exists
         Book result = service.getBookById(book.getId());
         if (result == null) {
             logger.warn("Book does not exist");
-            return null;
         }
-
         logger.info("Book successfully updated");
-        return service.updateBook(book);
+        Book book1 = service.updateBook(book);
+        model.addAttribute("books",book);
+        return "showBooks";
     }
 
-    @PutMapping("/books/purchase/{id}")
-    public boolean purchaseBookById(@PathVariable long id) {
-        logger.info("Purchasing book with ID: {}", id);
+//    @PutMapping("/books/purchase/{id}")
+//    public boolean purchaseBookById(@PathVariable long id) {
+//        logger.info("Purchasing book with ID: {}", id);
+//
+//        Book result = service.getBookById(id);
+//        // Check if book exists or if it's in stock
+//        if (result == null || result.getQuantity() <= 0) {
+//            logger.warn("Book not found or not in stock");
+//
+//        }
+//
+//        // Record purchase by decrementing quantity by 1
+//        result.setQuantity(result.getQuantity() - 1);
+//        if (service.updateBook(result) != null) {
+//            logger.info("Book successfully purchased");
+//            return true;
+//        }
+//
+//        logger.warn("Book purchase failed");
+//        return false;
+//    }
 
-        Book result = service.getBookById(id);
-        // Check if book exists or if it's in stock
-        if (result == null || result.getQuantity() <= 0) {
-            logger.warn("Book not found or not in stock");
-            return false;
-        }
-
-        // Record purchase by decrementing quantity by 1
-        result.setQuantity(result.getQuantity() - 1);
-        if (service.updateBook(result) != null) {
-            logger.info("Book successfully purchased");
-            return true;
-        }
-
-        logger.warn("Book purchase failed");
-        return false;
-    }
-
-    @DeleteMapping("/books/id/{id}")
-    public boolean deleteBookById(@PathVariable long id) {
+    @DeleteMapping("/books/{id}")
+    public String deleteBooksById(@PathVariable long id) {
         logger.info("Deleting book with ID: {}", id);
 
-        int count = service.getAllBooks().size();
-        service.deleteBookById(id);
-
         // If count changed, then delete was successful
-        if (count != service.getAllBooks().size()) {
+        if (service.deleteBookById(id)){
             logger.info("Book successfully deleted");
-            return true;
+        }else {
+            logger.info("Couldnt find book");
         }
-        logger.warn("Book delete failed");
-        return false;
+        return "showBooks";
     }
 
 }
