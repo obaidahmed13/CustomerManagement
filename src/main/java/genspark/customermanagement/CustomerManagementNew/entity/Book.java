@@ -1,19 +1,20 @@
 package genspark.customermanagement.CustomerManagementNew.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+@Setter
+@Getter
 @Entity
-public class Book {
+public class Book{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    public long id;
-
-    @Column(unique = true)
-    public String title;
-
-    public String author;
-    public int quantity;
+    private long id;
+    private String title;
+    private String author;
+    private int quantity;
 
     public Book() {
     }
@@ -22,38 +23,6 @@ public class Book {
         this.id = id;
         this.title = title;
         this.author = author;
-        this.quantity = quantity;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
