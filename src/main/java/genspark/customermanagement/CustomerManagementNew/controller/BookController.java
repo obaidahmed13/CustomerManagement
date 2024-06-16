@@ -33,6 +33,16 @@ public class BookController {
         return "public";
     }
 
+    @GetMapping("/admin")
+    public String getAdmin(){
+        return "admin";
+    }
+
+    @GetMapping("/default")
+    public String getDefault(){
+        return "default";
+    }
+
     @GetMapping("/books")
     public String getAllBooks(Model model) {
         List<Book> books = service.getAllBooks();
@@ -48,7 +58,7 @@ public class BookController {
         return "showBooks";
     }
 
-    @GetMapping("/books/{id}")
+    @GetMapping("/books/id/{id}")
     public String getBookById(@PathVariable long id,Model model) {
         logger.info("Getting book by ID: {}", id);
 
@@ -61,7 +71,7 @@ public class BookController {
         return "showBooks";
     }
 
-    @GetMapping("/books/{title}")
+    @GetMapping("/books/title/{title}")
     public String getBookByTitle(@PathVariable String title, Model model) {
         logger.info("Getting book by title: {}", title);
         Book result = service.getBookByTitle(title);
@@ -83,6 +93,16 @@ public class BookController {
         model.addAttribute("books",book);
         return "showBooks";
     }
+//    @PostMapping("/books")
+//    public String addBooks(@PathVariable String title, String author, int quantity, Model model) {
+//        logger.info("Adding new book with title: "+title);
+//        // Check if book with given title already exists
+//        Book book = new Book(title,author,quantity);
+//        logger.info("Book successfully added");
+//        Book book1 = service.addBook(book);
+//        model.addAttribute("books",book);
+//        return "showBooks";
+//    }
 
     @PutMapping("/books")
     public String updateBook(@RequestBody Book book, Model model) {
