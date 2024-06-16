@@ -84,25 +84,25 @@ public class BookController {
         return "showBooks";
     }
 
-    @PostMapping("/books")
-    public String addBook(@RequestBody Book book, Model model) {
-        logger.info("Adding new book with title: {}", book.getTitle());
-        // Check if book with given title already exists
-        logger.info("Book successfully added");
-        Book book1 = service.addBook(book);
-        model.addAttribute("books",book);
-        return "showBooks";
-    }
 //    @PostMapping("/books")
-//    public String addBooks(@PathVariable String title, String author, int quantity, Model model) {
-//        logger.info("Adding new book with title: "+title);
+//    public String addBook(@RequestBody Book book, Model model) {
+//        logger.info("Adding new book with title: {}", book.getTitle());
 //        // Check if book with given title already exists
-//        Book book = new Book(title,author,quantity);
 //        logger.info("Book successfully added");
 //        Book book1 = service.addBook(book);
 //        model.addAttribute("books",book);
 //        return "showBooks";
 //    }
+    @PostMapping("/books")
+    public String addBook(@RequestParam String title,@RequestParam String author,@RequestParam int quantity, Model model) {
+        logger.info("Adding new book with title: "+title);
+        // Check if book with given title already exists
+        Book book = new Book(title,author,quantity);
+        logger.info("Book successfully added");
+        Book book1 = service.addBook(book);
+        model.addAttribute("books",book);
+        return "showBooks";
+    }
 
     @PutMapping("/books")
     public String updateBook(@RequestBody Book book, Model model) {

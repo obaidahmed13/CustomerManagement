@@ -43,8 +43,8 @@ public class BeanConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/public").permitAll()
-                        .requestMatchers("/books").hasRole("NORMAL")
+                        .requestMatchers("/books").permitAll()
+
                         .requestMatchers("/admin").hasRole("ADMIN")
                         .anyRequest().authenticated())
                 .httpBasic(withDefaults())
