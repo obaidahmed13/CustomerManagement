@@ -95,10 +95,10 @@ public class BookController {
 //    }
     @PostMapping("/books")
     public String addBook(@RequestParam String title,@RequestParam String author,@RequestParam int quantity, Model model) {
-        logger.info("Adding new book with title: "+title);
+
         // Check if book with given title already exists
         Book book = new Book(title,author,quantity);
-        logger.info("Book successfully added");
+
         Book book1 = service.addBook(book);
         model.addAttribute("books",book);
         return "showBooks";

@@ -25,6 +25,5 @@ public class Book{
         this.quantity = quantity;
     }
 
-    public Throwable getTitle() {
-    }
+
 }
