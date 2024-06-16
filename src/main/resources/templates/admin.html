@@ -24,9 +24,50 @@
     </div>
 
     <div>
+        <button type="submit">Submit</button>
+    </div>
+</form>
+
+<h2>Deleting a book by ID</h2>
+<form th:action="@{/deleteBooksById}" method="post">
+    <div>
+        <label for="id">Id:</label>
+        <input type="text" id="id" name="id">
+
+    </div>
+
+    <div>
         <button type="submit">Search</button>
     </div>
 </form>
+
+<h2>Getting a Book By Title</h2>
+<form th:action="@{/getBookByTitle}" method="get">
+    <div>
+        <label for="booktitle">title:</label>
+        <input type="text" id="booktitle" name="title">
+
+    </div>
+
+    <div>
+        <button type="submit">Search</button>
+    </div>
+</form>
+
+<h2>Getting a Book By ID</h2>
+<form th:action="@{/getBookById}" method="get">
+    <div>
+        <label for="bookid">title:</label>
+        <input type="text" id="bookid" name="title">
+
+    </div>
+
+    <div>
+        <button type="submit">Search</button>
+    </div>
+</form>
+
+
 <a th:href="@{/logout}">Logout</a>
 </body>
 </html>
