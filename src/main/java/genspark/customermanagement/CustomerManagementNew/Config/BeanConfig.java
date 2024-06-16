@@ -44,7 +44,7 @@ public class BeanConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/public").permitAll()
-                        .requestMatchers("/normal").hasRole("NORMAL")
+                        .requestMatchers("/books").hasRole("NORMAL")
                         .requestMatchers("/admin").hasRole("ADMIN")
                         .anyRequest().authenticated())
                 .httpBasic(withDefaults())
@@ -75,9 +75,9 @@ public class BeanConfig {
             if (isAdmin) {
                 response.sendRedirect("/admin");
             } else if (isNormalUser) {
-                response.sendRedirect("/normal");
+                response.sendRedirect("/books");
             } else {
-                response.sendRedirect("/default");
+                response.sendRedirect("/showBooks");
             }
         };
     }
