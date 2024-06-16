@@ -16,14 +16,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @Slf4j
 public class BookController {
 
     @Autowired
     BookService service;
 
-    private static final Logger logger = LoggerFactory.getLogger(BookController.class);
+//    private static final Logger logger = LoggerFactory.getLogger(BookController.class);
     @GetMapping("/login")
     public String getLogin(){
         return "login";
@@ -50,35 +50,35 @@ public class BookController {
 
     @GetMapping("/books/{id}")
     public String getBookById(@PathVariable long id,Model model) {
-        logger.info("Getting book by ID: {}", id);
+//        logger.info("Getting book by ID: {}", id);
 
         Book result = service.getBookById(id);
         if (result == null) {
-            logger.warn("Book not found");
+//            logger.warn("Book not found");
         }
-        logger.info("Book successfully found");
+//        logger.info("Book successfully found");
         model.addAttribute("books",result);
         return "showBooks";
     }
 
     @GetMapping("/books/{title}")
     public String getBookByTitle(@PathVariable String title, Model model) {
-        logger.info("Getting book by title: {}", title);
+ //       logger.info("Getting book by title: {}", title);
         Book result = service.getBookByTitle(title);
         if (result == null) {
-            logger.warn("Book not found");
+           // logger.warn("Book not found");
             return null;
         }
-        logger.info("Book successfully found");
+//logger.info("Book successfully found");
         model.addAttribute("books",result);
         return "showBooks";
     }
 
     @PostMapping("/books")
     public String addBook(@RequestBody Book book, Model model) {
-        logger.info("Adding new book with title: {}", book.getTitle());
+  //      logger.info("Adding new book with title: {}", book.getTitle());
         // Check if book with given title already exists
-        logger.info("Book successfully added");
+ //       logger.info("Book successfully added");
         Book book1 = service.addBook(book);
         model.addAttribute("books",book);
         return "showBooks";
@@ -86,14 +86,14 @@ public class BookController {
 
     @PutMapping("/books")
     public String updateBook(@RequestBody Book book, Model model) {
-        logger.info("Updating book with title: {}", book.getTitle());
+  //      logger.info("Updating book with title: {}", book.getTitle());
 
         // Check if update target exists
         Book result = service.getBookById(book.getId());
         if (result == null) {
-            logger.warn("Book does not exist");
+          //  logger.warn("Book does not exist");
         }
-        logger.info("Book successfully updated");
+      //  logger.info("Book successfully updated");
         Book book1 = service.updateBook(book);
         model.addAttribute("books",book);
         return "showBooks";
@@ -123,13 +123,13 @@ public class BookController {
 
     @DeleteMapping("/books/{id}")
     public String deleteBooksById(@PathVariable long id) {
-        logger.info("Deleting book with ID: {}", id);
+      //  logger.info("Deleting book with ID: {}", id);
 
         // If count changed, then delete was successful
         if (service.deleteBookById(id)){
-            logger.info("Book successfully deleted");
+          //  logger.info("Book successfully deleted");
         }else {
-            logger.info("Couldnt find book");
+     //       logger.info("Couldnt find book");
         }
         return "showBooks";
     }
