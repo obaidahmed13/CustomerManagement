@@ -71,7 +71,7 @@ public class BookController {
         return "showBooks";
     }
 
-    @GetMapping("/books/title/{title}")
+    @GetMapping("/books/title")
     public String getBookByTitle(@RequestParam String title, Model model) {
  //       logger.info("Getting book by title: {}", title);
         Book result = service.getBookByTitle(title);
