@@ -159,7 +159,7 @@ public class BeanConfig {
             if (isAdmin) {
                 response.sendRedirect("/admin");
             } else if (isNormalUser) {
-                response.sendRedirect("/books");
+                response.sendRedirect("/default");
             } else {
                 response.sendRedirect("/showBooks");
             }

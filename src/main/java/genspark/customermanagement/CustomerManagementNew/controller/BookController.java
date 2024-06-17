@@ -120,8 +120,10 @@ public class BookController {
         result.setTitle(title);
         result.setAuthor(author);
         result.setQuantity(quantity);
+        service.deleteBookById(id);
+        Book updateBook = service.updateBook(result);
         
-        model.addAttribute("books",result);
+        model.addAttribute("books",updateBook);
         return "showBooks";
     }
 
