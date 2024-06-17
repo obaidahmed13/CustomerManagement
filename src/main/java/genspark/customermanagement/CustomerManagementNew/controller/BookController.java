@@ -58,8 +58,8 @@ public class BookController {
         return "showBooks";
     }
 
-    @GetMapping("/books/id/{id}")
-    public String getBookById(@PathVariable long id,Model model) {
+    @GetMapping("/books/id")
+    public String getBookById(@RequestParam long id,Model model) {
 //        logger.info("Getting book by ID: {}", id);
 
         Book result = service.getBookById(id);
