@@ -72,7 +72,7 @@ public class BookController {
     }
 
     @GetMapping("/books/title/{title}")
-    public String getBookByTitle(@PathVariable String title, Model model) {
+    public String getBookByTitle(@RequestParam String title, Model model) {
  //       logger.info("Getting book by title: {}", title);
         Book result = service.getBookByTitle(title);
         if (result == null) {
@@ -141,16 +141,16 @@ public class BookController {
 //        return false;
 //    }
 
-    @DeleteMapping("/books/{id}")
-    public String deleteBooksById(@PathVariable long id) {
+    @RequestMapping(value = "/books/delete", method = {RequestMethod.POST, RequestMethod.DELETE})
+    public String deleteBooksById(@RequestParam long id,Model model) {
       //  logger.info("Deleting book with ID: {}", id);
 
         // If count changed, then delete was successful
-        if (service.deleteBookById(id)){
-          //  logger.info("Book successfully deleted");
-        }else {
-     //       logger.info("Couldnt find book");
-        }
+        service.deleteBookById(id);
+        List<Book> books = service.getAllBooks();
+        System.out.println(books.size());
+        model.addAttribute("books", books);
+
         return "showBooks";
     }
 

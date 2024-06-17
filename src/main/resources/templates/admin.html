@@ -1,54 +1,47 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <title>Hello, world!</title>
+    <title>Admin Page</title>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="description" content="" />
-
 </head>
 <body>
 <h1>Welcome to the Admin Page</h1>
+
 <h2>Adding a book</h2>
 <form th:action="@{/books}" method="post">
     <div>
         <label for="title">Title:</label>
         <input type="text" id="title" name="title">
-
         <label for="author">Author:</label>
         <input type="text" id="author" name="author">
-
         <label for="quantity">Quantity:</label>
         <input type="text" id="quantity" name="quantity">
     </div>
-
     <div>
         <button type="submit">Submit</button>
     </div>
 </form>
 
 <h2>Deleting a book by ID</h2>
-<form th:action="@{/deleteBooksById}" method="post">
+<form th:action="@{/books/delete}" method="post">
     <div>
         <label for="id">Id:</label>
         <input type="text" id="id" name="id">
-
     </div>
-
+    <input type="hidden" name="_method" value="DELETE">
     <div>
-        <button type="submit">Search</button>
+        <button type="submit">Delete</button>
     </div>
 </form>
 
 <h2>Getting a Book By Title</h2>
 <form th:action="@{/getBookByTitle}" method="get">
     <div>
-        <label for="booktitle">title:</label>
+        <label for="booktitle">Title:</label>
         <input type="text" id="booktitle" name="title">
-
     </div>
-
     <div>
         <button type="submit">Search</button>
     </div>
@@ -57,16 +50,13 @@
 <h2>Getting a Book By ID</h2>
 <form th:action="@{/getBookById}" method="get">
     <div>
-        <label for="bookid">title:</label>
-        <input type="text" id="bookid" name="title">
-
+        <label for="bookid">Id:</label>
+        <input type="text" id="bookid" name="id">
     </div>
-
     <div>
         <button type="submit">Search</button>
     </div>
 </form>
-
 
 <a th:href="@{/logout}">Logout</a>
 </body>
