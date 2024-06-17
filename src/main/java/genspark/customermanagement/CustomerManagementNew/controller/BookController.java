@@ -106,9 +106,10 @@ public class BookController {
     }
 
     @PutMapping("/books")
-    public String updateBook(@RequestBody Book book, Model model) {
+    public String updateBook(RequestParam String title,@RequestParam String author,@RequestParam int quantity, Model model) {
   //      logger.info("Updating book with title: {}", book.getTitle());
-
+        Book book = new Book(title,author,quantity);
+        service.updateBook(book);
         // Check if update target exists
         Book result = service.getBookById(book.getId());
         if (result == null) {
