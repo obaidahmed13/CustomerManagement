@@ -64,7 +64,8 @@ public class BookController {
 
         Book result = service.getBookById(id);
         if (result == null) {
-//            logger.warn("Book not found");
+            model.addAttribute("message", "Book not found");
+            return "errorPage";
         }
 //        logger.info("Book successfully found");
         model.addAttribute("books",result);
@@ -76,8 +77,8 @@ public class BookController {
  //       logger.info("Getting book by title: {}", title);
         Book result = service.getBookByTitle(title);
         if (result == null) {
-           // logger.warn("Book not found");
-            return null;
+            model.addAttribute("message", "Book not found");
+            return "errorPage";
         }
 //logger.info("Book successfully found");
         model.addAttribute("books",result);
@@ -111,7 +112,8 @@ public class BookController {
         // Check if update target exists
         Book result = service.getBookById(book.getId());
         if (result == null) {
-          //  logger.warn("Book does not exist");
+            model.addAttribute("message", "Book not found.");
+            return "errorPage"; // Ensure this page exists
         }
       //  logger.info("Book successfully updated");
         Book book1 = service.updateBook(book);
