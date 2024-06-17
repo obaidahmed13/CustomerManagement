@@ -105,7 +105,7 @@ public class BookController {
         return "showBooks";
     }
 
-    @PutMapping("/books")
+    @PutMapping("/books/update")
     public String updateBook(@RequestParam long id,@RequestParam String title,@RequestParam String author,@RequestParam int quantity, Model model) {
   //      logger.info("Updating book with title: {}", book.getTitle());
 
@@ -120,8 +120,10 @@ public class BookController {
         result.setTitle(title);
         result.setAuthor(author);
         result.setQuantity(quantity);
+
+        Book updateBook = service.updateBook(result);
         
-        model.addAttribute("books",result);
+        model.addAttribute("books",updateBook);
         return "showBooks";
     }
 
