@@ -24,23 +24,23 @@
     </div>
 </form>
 
-<h2>Updating a book</h2>
-<form th:action="@{/books}" method="post">
-    <div>
-        <label for="updateid">Id:</label>
-        <input type="text" id="updateid" name="id" required>
-        <label for="updatetitle">Title:</label>
-        <input type="text" id="updatetitle" name="title" required>
-        <label for="updateauthor">Author:</label>
-        <input type="text" id="updateauthor" name="author" required>
-        <label for="updatequantity">Quantity:</label>
-        <input type="number" id="updatequantity" name="quantity" required>
-    </div>
-    <div>
-        <button type="submit">Submit</button>
-    </div>
-    <input type="hidden" name="_method" value="put"/>
-</form>
+<!--<h2>Updating a book</h2>-->
+<!--<form th:action="@{/books}" method="post">-->
+<!--    <div>-->
+<!--        <label for="updateid">Id:</label>-->
+<!--        <input type="text" id="updateid" name="id" required>-->
+<!--        <label for="updatetitle">Title:</label>-->
+<!--        <input type="text" id="updatetitle" name="title" required>-->
+<!--        <label for="updateauthor">Author:</label>-->
+<!--        <input type="text" id="updateauthor" name="author" required>-->
+<!--        <label for="updatequantity">Quantity:</label>-->
+<!--        <input type="number" id="updatequantity" name="quantity" required>-->
+<!--    </div>-->
+<!--    <div>-->
+<!--        <button type="submit">Submit</button>-->
+<!--    </div>-->
+<!--    <input type="hidden" name="_method" value="put"/>-->
+<!--</form>-->
 
 <h2>Deleting a book by ID</h2>
 <form th:action="@{/books/delete}" method="post">
