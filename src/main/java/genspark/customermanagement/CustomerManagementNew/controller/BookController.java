@@ -106,7 +106,7 @@ public class BookController {
     }
 
     @PutMapping("/books")
-    public String updateBook(RequestParam String title,@RequestParam String author,@RequestParam int quantity, Model model) {
+    public String updateBook(RequestParam int id, String title,@RequestParam String author,@RequestParam int quantity, Model model) {
   //      logger.info("Updating book with title: {}", book.getTitle());
         Book book = new Book(title,author,quantity);
         service.updateBook(book);
