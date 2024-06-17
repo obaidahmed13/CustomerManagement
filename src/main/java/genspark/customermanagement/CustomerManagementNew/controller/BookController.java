@@ -106,19 +106,22 @@ public class BookController {
     }
 
     @PutMapping("/books")
-    public String updateBook(RequestParam String title,@RequestParam String author,@RequestParam int quantity, Model model) {
+    public String updateBook(@RequestParam long id,@RequestParam String title,@RequestParam String author,@RequestParam int quantity, Model model) {
   //      logger.info("Updating book with title: {}", book.getTitle());
-        Book book = new Book(title,author,quantity);
-        service.updateBook(book);
+
+
         // Check if update target exists
-        Book result = service.getBookById(book.getId());
+        Book result = service.getBookById(id);
         if (result == null) {
             model.addAttribute("message", "Book not found.");
             return "errorPage"; // Ensure this page exists
         }
       //  logger.info("Book successfully updated");
-        Book book1 = service.updateBook(book);
-        model.addAttribute("books",book);
+        result.setTitle(title);
+        result.setAuthor(author);
+        result.setQuantity(quantity);
+        
+        model.addAttribute("books",result);
         return "showBooks";
     }
 

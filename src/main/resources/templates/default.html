@@ -11,7 +11,7 @@
 <body>
 <h1>Welcome to the Default Page</h1>
 <h2>Getting a Book By Title</h2>
-<form th:action="@{/getBookByTitle}" method="get">
+<form th:action="@{/books/title}" method="get">
     <div>
         <label for="booktitle">title:</label>
         <input type="text" id="booktitle" name="title">
@@ -24,7 +24,7 @@
 </form>
 
 <h2>Getting a Book By ID</h2>
-<form th:action="@{/getBookById}" method="get">
+<form th:action="@{/books/id}" method="get">
     <div>
         <label for="bookid">title:</label>
         <input type="text" id="bookid" name="title">
