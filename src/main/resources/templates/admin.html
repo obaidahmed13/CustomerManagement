@@ -24,6 +24,21 @@
     </div>
 </form>
 
+<h2>Adding a book</h2>
+<form th:action="@{/books}" method="post">
+    <div>
+        <label for="updatetitle">Title:</label>
+        <input type="text" id="updatetitle" name="title">
+        <label for="updateauthor">Author:</label>
+        <input type="text" id="updateauthor" name="author">
+        <label for="updatequantity">Quantity:</label>
+        <input type="text" id="updatequantity" name="quantity">
+    </div>
+    <div>
+        <button type="submit">Submit</button>
+    </div>
+</form>
+
 <h2>Deleting a book by ID</h2>
 <form th:action="@{/books/delete}" method="post">
     <div>
